@@ -40,13 +40,13 @@ $sortHeadings = [
 <div class="container pt-2 pb-3 pt-md-5 pb-md-4">
   <div class="row justify-content-center">
     <div class="col">
-      <?php if ($itemSetShow): ?>
+      <?php if ($itemSetShow || (array_key_exists('item_set_id', $query) && ($item_set_id = $query['item_set_id']) && ($itemSet = $this->api()->read('item_sets', $item_set_id[0])->getContent()) && ($itemSetShow = 1))): ?>
         <?php echo $this->pageTitle($itemSet->displayTitle(null, ($filterLocale ? $lang : null)), 2); ?>
       <?php else: ?>
         <?php echo $this->pageTitle($translate('Items'), 2); ?>
       <?php endif; ?>
       <?php if ($totalResults > 0): ?>
-        <?php if ($this->searchFilters()): ?>
+        <?php if ($this->searchFilters() && !$itemSetShow): ?>
           <div class="results mb-3">
             Showing
             <?php echo number_format($totalResults); ?>
@@ -109,11 +109,11 @@ $sortHeadings = [
           </li>
           <li class="nav-item d-none d-md-block">
             <div class="btn-group" role="group" aria-label="Layout View">
-              <button type="button" class="btn btn-secondary active list" aria-pressed="true" aria-label="List View">
+              <button type="button" class="btn btn-secondary list" aria-pressed="true" aria-label="List View">
                 <i class="fas fa-list" aria-hidden="true" title="List View">
                 </i>
               </button>
-              <button type="button" class="btn btn-secondary grid" aria-label="Grid View">
+              <button type="button" class="btn btn-secondary active grid" aria-label="Grid View">
                 <i class="fas fa-th" aria-hidden="true" title="Grid View">
                 </i>
               </button>
@@ -127,31 +127,33 @@ $sortHeadings = [
 
   <?php $this->trigger('view.browse.before'); ?>
   <div class="container list pt-2 pb-3 pt-md-3 pb-md-4">
-    <div class="row list" id="browse-container">
+    <div class="row grid" id="browse-container">
       <?php
       $headingTerm = $this->siteSetting('browse_heading_property_term');
       $bodyTerm = $this->siteSetting('browse_body_property_term');
       foreach ($items as $item):
         $heading = $headingTerm ? $item->value($headingTerm, ['default' => $translate('[Untitled]'), 'lang' => ($filterLocale ? [$lang, ''] : null)]) : $item->displayTitle(null, ($filterLocale ? [$lang, ''] : null));
+        switch ($heading) {
+          case str_contains($heading, "Fashion Calendar,"):
+            $displayTitle = trim(explode("Fashion Calendar,", $heading)[1]);
+            break;
+          case str_contains($heading, "Fashion International,"):
+            $displayTitle = trim(explode("Fashion International,", $heading)[1]);
+            break;
+          case str_contains($heading, "Home Furnishings Calendar,"):
+            $displayTitle = trim(explode("Home Furnishings Calendar,", $heading)[1]);
+            break;
+          default:
+            $displayTitle = $heading;
+        }
         ?>
         <div class="col item-container">
           <div class="card border-0">
             <?php echo $item->linkRaw($this->thumbnail($item, 'medium', ['class' => 'browse-thumbnail shadow-sm rounded', 'alt' => $heading]), null, ['class' => 'card-img']); ?>
             <div class="card-body overflow-hidden">
               <h3 class="item-title">
-                <?php echo $item->link($heading, null, ['class' => 'text-dark text-decoration-none']); ?>
+                <?php echo $item->link($displayTitle, null, ['class' => 'text-dark text-decoration-none']); ?>
               </h3>
-              <?php echo $this->CreatorHelper($item); ?>
-              <?php echo $this->ItemDetailsHelper($item); ?>
-              <?php if ($abstract = $item->value('dcterms:abstract', ['lang' => ($filterLocale ? [$lang, ''] : null)])): ?>
-                <div class="abstract">
-                  <?php echo $abstract->asHtml(); ?>
-                </div>
-              <?php elseif ($description = $item->value('dcterms:description', ['lang' => ($filterLocale ? [$lang, ''] : null)])): ?>
-                <div class="description">
-                  <?php echo $description->asHtml(); ?>
-                </div>
-              <?php endif; ?>
             </div>
           </div>
         </div>
