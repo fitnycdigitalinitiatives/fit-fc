@@ -16,7 +16,15 @@ $lang = $this->lang();
     <div class="row" id="media-wrapper">
       <div class="col">
         <div class="media-embeds">
-          <?php echo $this->miradorViewer($item); ?>
+          <?php // echo $this->miradorViewer($item); ?>
+          <?php
+          foreach ($itemMedia as $media) {
+            if ($media->mediaType() == "application/pdf") {
+              echo $media->render();
+              break;
+            }
+          }
+          ?>
         </div>
       </div>
     </div>
@@ -45,6 +53,28 @@ $lang = $this->lang();
       <?php endif; ?>
       <?php echo $this->SocialShare($item); ?>
     </div>
+    <div class="col-sm-auto">
+      <?php
+      $dataLink = "";
+      foreach ($item->value('dcterms:identifier', ['all' => true, 'type' => 'uri']) as $identifier) {
+        if ($identifier->value() == "SPARC reference code") {
+          $refCode = $identifier->uri();
+          $dataLink = "/page/data?issue%5B%5D=" . urlencode($refCode);
+          break;
+        }
+      }
+      ?>
+      <?php if ($dataLink): ?>
+        <a id="map-button" class="btn btn-fit-green floating-action mt-2 mt-sm-0" aria-label="View this issue as data"
+          href="<?php echo $dataLink; ?>">
+          <span class="action-container">
+            <i class="fas fa-table" aria-hidden="true" title="View this issue as data">
+            </i>
+            Data
+          </span>
+        </a>
+      <?php endif; ?>
+    </div>
   </div>
 </div>
 <div class="container pt-2 pb-3 pt-md-4 pt-md-5">
@@ -62,31 +92,6 @@ $lang = $this->lang();
         </h4>
         <?php echo $this->CitationHelper($item); ?>
       </div>
-      <div class="property">
-        <?php $itemSets = $item->itemSets(); ?>
-        <?php if (count($itemSets) > 0): ?>
-          <h4>
-            <?php echo $translate('Collections'); ?>
-          </h4>
-          <?php foreach ($itemSets as $itemSet): ?>
-            <div class="value"><a href="<?php echo $escape($itemSet->url()); ?>"><?php echo $itemSet->displayTitle(null, ($filterLocale ? $lang : null)); ?></a></div>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </div>
-      <?php if (($this->siteSetting('show_attached_pages', true)) && ($sitePages = $item->sitePages($site->id()))): ?>
-        <div class="property">
-          <h4>
-            <?php echo $translate('Site pages'); ?>
-          </h4>
-          <div class="values">
-            <?php foreach ($sitePages as $sitePage): ?>
-              <div class="value">
-                <?php echo $sitePage->link($sitePage->title()); ?>
-              </div>
-            <?php endforeach; ?>
-          </div>
-        </div>
-      <?php endif; ?>
     </div>
   </div>
 </div>
