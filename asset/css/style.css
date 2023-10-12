@@ -182,12 +182,16 @@ a:hover {
 }
 
 .navbar-brand img {
-  height: 20px;
+  height: 75px;
 }
 
 header .logo img {
-  max-height: 100px;
+  max-height: 75px;
   max-width: 100%;
+}
+
+header .nav-link {
+  font-weight: bold;
 }
 
 .dropdown-submenu {

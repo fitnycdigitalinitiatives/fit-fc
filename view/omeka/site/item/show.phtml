@@ -56,11 +56,13 @@ $lang = $this->lang();
     <div class="col-sm-auto">
       <?php
       $dataLink = "";
-      foreach ($item->value('dcterms:identifier', ['all' => true, 'type' => 'uri']) as $identifier) {
-        if ($identifier->value() == "SPARC reference code") {
-          $refCode = $identifier->uri();
-          $dataLink = "/page/data?issue%5B%5D=" . urlencode($refCode);
-          break;
+      if (!str_starts_with($itemSet->displayTitle(), "Fashion International")) {
+        foreach ($item->value('dcterms:identifier', ['all' => true, 'type' => 'uri']) as $identifier) {
+          if ($identifier->value() == "SPARC reference code") {
+            $refCode = $identifier->uri();
+            $dataLink = "/page/data?issue%5B%5D=" . urlencode($refCode);
+            break;
+          }
         }
       }
       ?>
