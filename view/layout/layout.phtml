@@ -69,39 +69,33 @@ $userBar = $this->userBar();
 <div class="flex-shrink-0" id="content" role="main">
   <?php echo $this->content; ?>
 </div>
-<footer class="footer mt-auto py-3 py-md-5 border-top border-light">
-  <div class="container text-center">
-    <div class="row justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-5">
-        <a href="https://www.fitnyc.edu">
-          <img class="mb-3" src="<?php echo $this->assetUrl('img/wordmark-black-1-line.png'); ?>" alt="FIT SUNY Logo"
-            id="fit-logo">
-        </a>
-        <p class="small">
-          ©
-          <?php echo date("Y"); ?> Fashion Institute of Technology
+<footer class="footer mt-auto py-3 py-md-5 border-top border-light bg-light">
+  <div class="container small">
+    <div class="row justify-content-between">
+      <div class="col-md-5 text-center">
+        <img class="mb-3" src="<?php echo $this->assetUrl('img/clir-black-with-wordmark.png'); ?>"
+          alt="The Council on Library and Information Resources" id="clir-logo">
+        <p class="text-left">The Ruth Finley Collection: Digitizing 70 Years of the Fashion Calendar is funded with a
+          Hidden Collections Grant from the <a href="https://www.clir.org/">Council on Library and Information
+            Resources</a> (CLIR) and is made possible with funding from the Andrew W. Mellon Foundation.</p>
+      </div>
+      <div class="col-md-5 text-center">
+        <img class="my-3" src="<?php echo $this->assetUrl('img/wordmark-black-1-line.png'); ?>" alt="FIT SUNY Logo"
+          id="fit-suny-logo">
+        <p>
+          ©2023 Fashion Institute of Technology
           <br>
           All rights reserved.
         </p>
-        <p class="text-left">This site is an initiative of the FIT Library.</p>
-        <ul class="list-inline mb-0">
-          <li class="list-inline-item"><a class="text-muted" href="https://www.fitnyc.edu/library/"
-              aria-label="FIT Library Homepage"><i class="fas fa-home" aria-hidden="true"
-                title="FIT Library Homepage"></i><span class="sr-only">FIT Library Homepage</span></a></li>
-          <li class="list-inline-item"><a class="text-muted" href="https://www.facebook.com/FITLibrary"
-              aria-label="FIT Library Facebook"><i class="fab fa-facebook" aria-hidden="true"
-                title="FIT Library Facebook"></i><span class="sr-only">FIT Library Facebook</span></a></li>
-          <li class="list-inline-item"><a class="text-muted" href="https://twitter.com/FITLibrary"
-              aria-label="FIT Library Twitter"><i class="fab fa-twitter" aria-hidden="true"
-                title="FIT Library Twitter"></i><span class="sr-only">FIT Library Twitter</span></a></li>
-          <li class="list-inline-item"><a class="text-muted" href="http://pinterest.com/fitlibrary/"
-              aria-label="FIT Library Pinterest"><i class="fab fa-pinterest-p" aria-hidden="true"
-                title="FIT Library Pinterest"></i><span class="sr-only">FIT Library Pinterest</span></a></li>
-          <li class="list-inline-item"><a class="text-muted" href="https://www.instagram.com/fitnyclibrary/"
-              aria-label="FIT Library Instagram"><i class="fab fa-instagram" aria-hidden="true"
-                title="FIT Library Instagram"></i><span class="sr-only">FIT Library Instagram</span></a></li>
-
-        </ul>
+        <p class="text-left">The views, opinions, and conclusions expressed in this page are those of the author or
+          organization and not necessarily those of the Fashion Institute of Technology or its officers and trustees.
+          The author or organization
+          is solely responsible for its content.</p>
+        <p class="text-left">This site is a joint initiative of the <a
+            href="https://www.fitnyc.edu/academics/library/">Gladys
+            Marcus Library</a> and the <a
+            href="https://www.fitnyc.edu/academics/academic-divisions/liberal-arts/history-of-art/">FIT History of Art
+            Department</a>.</p>
       </div>
     </div>
   </div>

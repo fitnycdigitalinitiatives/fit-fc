@@ -213,8 +213,12 @@ header .nav-link {
 }
 
 /* footer  */
-footer #fit-logo {
-  height: 25px;
+footer #clir-logo {
+  max-height: 75px;
+}
+
+footer #fit-suny-logo {
+  max-height: 30px;
 }
 
 /* Search  */
