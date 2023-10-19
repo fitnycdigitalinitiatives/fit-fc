@@ -1,20 +1,4 @@
 $(document).ready(function () {
-  //Dropdown fix
-  $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
-    if (!$(this).next().hasClass('show')) {
-      $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
-    }
-    var $subMenu = $(this).next(".dropdown-menu");
-    $subMenu.toggleClass('show');
-
-
-    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
-      $('.dropdown-submenu .show').removeClass("show");
-    });
-
-
-    return false;
-  });
   // Item browse and search
   if ($('body').hasClass('resource browse') || $('body').hasClass('resource search')) {
     // Infinite scroll/load more
@@ -105,76 +89,12 @@ $(document).ready(function () {
         updateFocus();
       });
     }
-    // Layout toggle
-    function layoutList() {
-      $('.btn.list').toggleClass("active", true).attr("aria-pressed", "true");
-      $('.btn.grid').toggleClass("active", false).attr("aria-pressed", "false");
-      $('#browse-container').hide().toggleClass("list", true).toggleClass("grid", false).fadeIn("slow");
-      sessionStorage.setItem("browseLayout", "List");
-    }
-
-    function layoutGrid() {
-      $('.btn.grid').toggleClass("active", true).attr("aria-pressed", "true");
-      $('.btn.list').toggleClass("active", false).attr("aria-pressed", "false");
-      $('#browse-container').hide().toggleClass("grid", true).toggleClass("list", false).fadeIn("slow");
-      sessionStorage.setItem("browseLayout", "Grid");
-    }
-    if (sessionStorage.getItem("browseLayout")) {
-      if (sessionStorage.getItem("browseLayout") == "List") {
-        layoutList();
-      } else if (sessionStorage.getItem("browseLayout") == "Grid") {
-        layoutGrid();
-      }
-    }
-    $('.btn.list').on("click", function () {
-      layoutList();
-    });
-    $('.btn.grid').on("click", function () {
-      layoutGrid();
-    });
   }
   //Media viewer
   if ($('body').hasClass('show')) {
-    if (window.matchMedia('(min-width: 768px)').matches) {
-      //tooltips
-      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-      })
-    }
-    //advance buttons
-    $('#media-sidebar .btnNext').click(function () {
-      var next = $('#mediaTab .nav-item').has('button.active').next('li');
-      if (next.length) {
-        $(next).children('button').trigger('click');
-      } else {
-        $("#mediaTab .nav-item:first").find('button').trigger('click');
-      }
-    });
-    // Pause video when changing tabs
-    $('#media-sidebar .nav-link').click(function () {
-      var selectedTab = $(this).data('bs-target');
-      $('#mediaTabContent .tab-pane:not(' + selectedTab + ') .youtube').each(function () {
-        $(this)[0].contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-      });
-      $('#mediaTabContent .tab-pane:not(' + selectedTab + ') .vimeo').each(function () {
-        $(this)[0].contentWindow.postMessage('{"method":"pause"}', '*');
-      });
-      $('#mediaTabContent .tab-pane:not(' + selectedTab + ') .vjs-tech').each(function () {
-        $(this).get(0).pause();
-      });
-    });
     //clipboard
     $('.clip-button').each(function (index) {
       new ClipboardJS(this);
     });
-    //toasts
-    if ($('#embargo').length) {
-      var embargo = $('#embargo');
-      toast = new bootstrap.Toast(embargo);
-      toast.show();
-    }
   }
-  //advanced search item set dropdown
-  $('#advanced-search-modal #item-sets option:contains("Select item set…")').text('Select collection…');
 });
