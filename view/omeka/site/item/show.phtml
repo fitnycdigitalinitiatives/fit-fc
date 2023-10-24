@@ -60,14 +60,14 @@ $lang = $this->lang();
         foreach ($item->value('dcterms:identifier', ['all' => true, 'type' => 'uri']) as $identifier) {
           if ($identifier->value() == "SPARC reference code") {
             $refCode = $identifier->uri();
-            $dataLink = "/page/data?issue%5B%5D=" . urlencode($refCode);
+            $dataLink = "/page/data?issue=" . urlencode($refCode);
             break;
           }
         }
       }
       ?>
       <?php if ($dataLink): ?>
-        <a id="map-button" class="btn btn-fit-green floating-action mt-2 mt-sm-0" aria-label="View this issue as data"
+        <a id="data-button" class="btn btn-fit-green floating-action mt-2 mt-sm-0" aria-label="View this issue as data"
           href="<?php echo $dataLink; ?>">
           <span class="action-container">
             <i class="fas fa-table" aria-hidden="true" title="View this issue as data">
