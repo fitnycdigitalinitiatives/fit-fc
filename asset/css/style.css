@@ -846,3 +846,9 @@ footer #fit-suny-logo {
 .page .row.blocks>div:not(:last-child) {
   padding-bottom: 3rem;
 }
+
+@media (min-width:768px) {
+  .page .reading p {
+    font-size: 1.25rem;
+  }
+}
