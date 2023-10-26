@@ -63,6 +63,11 @@ textarea.form-control::placeholder {
   box-shadow: none;
 }
 
+.form-check-input:checked {
+  background-color: rgb(33, 37, 41);
+  border: rgb(33, 37, 41);
+}
+
 .list-group-item-action:focus,
 .list-group-item-action:hover {
   background-color: #fec2be;
