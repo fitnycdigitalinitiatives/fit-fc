@@ -10,8 +10,8 @@ if (!$sortOrderQuery) {
 ?>
 <form class="sorting" action="">
     <div class="input-group">
-        <span class="input-group-text"><i class="fas fa-sort" aria-hidden="true" title="Sort issues"></i><span
-                class="sr-only">Sort issues</span></span>
+        <span class="input-group-text bg-dark text-white"><i class="fas fa-sort" aria-hidden="true"
+                title="Sort issues"></i><span class="sr-only">Sort issues</span></span>
         <select class="form-select" name="sort_order" aria-label="<?php echo $translate('Sort order'); ?>"
             onchange="this.form.submit()">
             <option value="asc" <?php echo ($sortOrderQuery === 'asc') ? 'selected' : ''; ?>>
