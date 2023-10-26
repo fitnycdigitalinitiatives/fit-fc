@@ -58,6 +58,11 @@ textarea.form-control::placeholder {
   color: var(--bs-body-color);
 }
 
+.form-control:focus {
+  border-color: initial;
+  box-shadow: none;
+}
+
 .list-group-item-action:focus,
 .list-group-item-action:hover {
   background-color: #fec2be;
@@ -284,52 +289,6 @@ footer #fit-suny-logo {
 
 #advanced-search-modal .add-value {
   margin-bottom: 0;
-}
-
-.twitter-typeahead {
-  flex: 1 1 auto;
-  width: 1%;
-  min-width: 0;
-}
-
-.twitter-typeahead input.form-control {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.twitter-typeahead .tt-menu {
-  width: 100%;
-  max-height: 75vh;
-  overflow-y: auto;
-  border-radius: .25rem;
-  margin: 10px 0;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, .125);
-}
-
-.twitter-typeahead .tt-dataset {
-  border-radius: .25rem;
-}
-
-.twitter-typeahead .tt-dataset .tt-suggestion {
-  padding: .5rem 1rem;
-  cursor: pointer;
-  border-bottom: 1px solid rgba(0, 0, 0, .125);
-}
-
-.twitter-typeahead .tt-dataset .tt-suggestion:hover,
-.twitter-typeahead .tt-dataset .tt-suggestion:focus,
-.twitter-typeahead .tt-dataset .tt-suggestion.tt-cursor {
-  background-color: #f8f9fa;
-}
-
-.twitter-typeahead .tt-dataset .tt-suggestion:first-child {
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-}
-
-.twitter-typeahead .tt-dataset .tt-suggestion:last-child {
-  border-bottom: 0;
 }
 
 /* Homepage */
