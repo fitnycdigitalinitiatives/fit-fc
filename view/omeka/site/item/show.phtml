@@ -4,6 +4,7 @@ $escape = $this->plugin('escapeHtml');
 $this->htmlElement('body')->appendAttribute('class', 'item resource show');
 $itemMedia = $item->media();
 $this->headScript()->appendFile('https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js', 'text/javascript', ['defer' => 'defer']);
+$this->headScript()->appendFile('https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js', 'text/javascript');
 
 $filterLocale = (bool) $this->siteSetting('filter_locale_values');
 $lang = $this->lang();
@@ -53,29 +54,62 @@ $lang = $this->lang();
       <?php endif; ?>
       <?php echo $this->SocialShare($item); ?>
     </div>
-    <div class="col-sm-auto">
-      <?php
-      $dataLink = "";
-      if (!str_starts_with($itemSet->displayTitle(), "Fashion International")) {
+    <div class="col-md-auto mt-2 mt-md-0">
+      <div class="row">
+        <?php
+        $refCode = "";
+        $iaCode = "";
         foreach ($item->value('dcterms:identifier', ['all' => true, 'type' => 'uri']) as $identifier) {
           if ($identifier->value() == "SPARC reference code") {
             $refCode = $identifier->uri();
-            $dataLink = "/page/data?issue=" . urlencode($refCode);
-            break;
+          } elseif ($identifier->value() == "Internet Archive ID") {
+            $iaCode = $identifier->uri();
           }
         }
-      }
-      ?>
-      <?php if ($dataLink): ?>
-        <a id="data-button" class="btn btn-dark floating-action mt-2 mt-sm-0" aria-label="View this issue as data"
-          href="<?php echo $dataLink; ?>">
-          <span class="action-container">
-            <i class="fas fa-table" aria-hidden="true" title="View this issue as data">
-            </i>
-            Data
-          </span>
-        </a>
-      <?php endif; ?>
+        ?>
+        <?php if ($refCode && $iaCode): ?>
+          <div class="col-auto">
+            <div class="dropdown">
+              <button class="btn btn-dark floating-action" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="action-container">
+                  <i class="fas fa-download" aria-hidden="true" title="Download this issue">
+                  </i>
+                  Files
+                </span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" id="pdf-download"
+                    href="<?php echo 'https://archive.org/download/' . $iaCode . '/' . $refCode . '.pdf'; ?>">PDF</a>
+                </li>
+                <li><a class="dropdown-item"
+                    href="<?php echo 'https://archive.org/download/' . $iaCode . '/' . $refCode . '_images.tar'; ?>">Tiff
+                    (High Res)</a></li>
+                <li><a id="text-download" class="dropdown-item" data-id="<?php echo $refCode; ?>"
+                    href="<?php echo 'https://archive.org/download/' . $iaCode . '/' . $refCode . '_djvu.txt'; ?>">Text
+                    (OCR)</a></li>
+              </ul>
+            </div>
+          </div>
+        <?php endif; ?>
+        <?php
+        $dataLink = "";
+        if (!str_starts_with($itemSet->displayTitle(), "Fashion International") && $refCode) {
+          $dataLink = "/page/data?issue=" . urlencode($refCode);
+        }
+        ?>
+        <?php if ($dataLink): ?>
+          <div class="col-auto">
+            <a id="data-button" class="btn btn-dark floating-action" aria-label="View this issue as data"
+              href="<?php echo $dataLink; ?>">
+              <span class="action-container">
+                <i class="fas fa-table" aria-hidden="true" title="View this issue as data">
+                </i>
+                Data
+              </span>
+            </a>
+          </div>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
 </div>

@@ -522,7 +522,6 @@ footer #fit-suny-logo {
 
 #browse-container.grid .browse-thumbnail {
   width: 100%;
-  border: 1px solid #f8f9fa;
 }
 
 #browse-container.grid .item-title {
@@ -757,15 +756,16 @@ footer #fit-suny-logo {
   border-top-right-radius: calc(.25rem - 2px);
 }
 
+
+
 .item.resource.show #social-share .clip-button {
-  color: #0036f9;
   border-radius: .25rem;
   transition: color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .item.resource.show #social-share .clip-button:focus {
-  color: #002bc7;
-  box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+  color: #424649;
+  box-shadow: 0 0 0 0.25rem #42464987;
 }
 
 @media (min-width: 768px) {

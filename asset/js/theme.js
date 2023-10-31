@@ -96,5 +96,13 @@ $(document).ready(function () {
     $('.clip-button').each(function (index) {
       new ClipboardJS(this);
     });
+    $("#text-download").on("click.fashionCalendar", function (event) {
+      event.preventDefault();
+      saveAs($(this).attr("href"), $(this).data("id") + ".txt");
+    });
+    $("#pdf-download").on("click.fashionCalendar", function (event) {
+      event.preventDefault();
+      $("iframe.pdfobject").contents().find("#download").click();
+    });
   }
 });
