@@ -18,7 +18,7 @@ class SocialShare extends AbstractHelper
         <!-- Social Share  -->
         <ul id="social-share" class="list-inline mb-0 mt-2 fs-4">
           <li class="list-inline-item">
-            <button class="border-0 bg-transparent p-0 clip-button" aria-label="Copy item link" data-clipboard-text="' . $url . '">
+            <button class="border-0 bg-transparent p-0 clip-button text-dark" aria-label="Copy item link" data-clipboard-text="' . $url . '">
               <i class="fas fa-link" title="Copy item link">
               </i>
             </button>
