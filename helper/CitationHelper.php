@@ -9,74 +9,11 @@ class CitationHelper extends AbstractHelper
   public function __invoke(ItemRepresentation $item)
   {
     $escape = $this->getView()->plugin('escapeHtml');
-    $apaAuthors = '';
-    $chicagoAuthors = '';
-    $mlaAuthors = '';
     $title = $item->displayTitle();
-    $titleCased = $this->titleCase($title);
-    $date = $item->value('dcterms:date');
-    $thesis = '';
-    $chicagoThesis = 'FIT Digital Repository';
-    $mlaThesis = '<em>FIT Digital Repository</em>';
-    if ($types = $item->value('dcterms:type', ['all' => true])) {
-      foreach ($types as $type) {
-        if (ucfirst($escape($type)) == "Thesis") {
-          $thesis = ' [Master\'s thesis, Fashion Institute of Technology, State University of New York]';
-          $chicagoThesis = 'Master\'s thesis, Fashion Institute of Technology, State University of New York';
-          $mlaThesis = 'Fashion Institute of Technology, State University of New York, Master\'s thesis. <em>FIT Digital Repository</em>';
-        }
-      }
-    }
     $url = $escape($item->url());
-    if ($contributors = $item->value('dcterms:contributor', ['all' => true])) {
-      $authorList = [];
-      foreach ($contributors as $key => $contributor) {
-        if (str_contains($contributor->asHtml(), 'Author') || str_contains($contributor->asHtml(), 'Creator')) {
-          if (!in_array($contributor, $authorList)) {
-            $authorList[] = $contributor;
-          }
-        }
-      }
-      if (empty($authorList)) {
-        $authorList[] = $contributors[0];
-      }
-      $len = count($authorList);
-      foreach ($authorList as $authorKey => $author) {
-        $lastName = trim(explode(",", $author)[0]);
-        $firstAndMiddle = trim(explode(",", $author)[1]);
-        $firstAndMiddleArray = explode(' ', $firstAndMiddle);
-        $initials = '';
-        foreach ($firstAndMiddleArray as $initialKey => $part) {
-          if ($initialKey == 0) {
-            $initials .= strtoupper($part[0]) . '.';
-          } else {
-            $initials .= ' ' . strtoupper($part[0]) . '.';
-          }
-        }
-        if ($authorKey == 0) {
-          $apaAuthors .= $lastName . ', ' . $initials;
-          $chicagoAuthors .= $author;
-          $mlaAuthors .= $author;
-        } elseif (($len - $authorKey) == 1) {
-          $apaAuthors .= ', & ' . $lastName . ', ' . $initials;
-          $chicagoAuthors .= ', and ' . $firstAndMiddle . ' ' . $lastName;
-          $mlaAuthors .= ', and ' . $firstAndMiddle . ' ' . $lastName;
-        } else {
-          $apaAuthors .= ', ' . $lastName . ', ' . $initials;
-          $chicagoAuthors .= ', ' . $firstAndMiddle . ' ' . $lastName;
-        }
-        if ($len > 2) {
-          $mlaAuthors = $authorList[0] . ', et al';
-        }
-      }
-      $apa = $apaAuthors . ' (' . $date . '). <em>' . $title . '</em>' . $thesis . '. FIT Institutional Repository. ' . $url;
-      $chicago = $chicagoAuthors . '. "' . $titleCased . '." ' . $chicagoThesis . ', ' . $date . '. ' . $url;
-      $mla = $mlaAuthors . '. <em>' . $titleCased . '</em>. ' . $date . '. ' . $mlaThesis . ', ' . $url;
-    } else {
-      $apa = '<em>' . $title . '</em>' . $thesis . '. (' . $date . ')' . '. FIT Institutional Repository. ' . $url;
-      $chicago = '"' . $titleCased . '." ' . $chicagoThesis . ', ' . $date . '. ' . $url;
-      $mla = '<em>' . $titleCased . '</em>. ' . $date . '. ' . $mlaThesis . ', ' . $url;
-    }
+    $apa = 'Finley, R. <em>' . $title . '</em>. Fashion Calendar Research Database, ' . $url;
+    $chicago = 'Finley, Ruth. "' . $title . '". Fashion Calendar Research Database. ' . $url;
+    $mla = 'Finley, Ruth. <em>' . $title . '</em>. Fashion Calendar Research Database, ' . $url;
     return '
         <ul class="nav nav-tabs mb-3" id="citationTab" role="tablist">
           <li class="nav-item" role="presentation">
