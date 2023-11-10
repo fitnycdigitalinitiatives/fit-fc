@@ -104,5 +104,7 @@ $(document).ready(function () {
       event.preventDefault();
       $("iframe.pdfobject").contents().find("#download").click();
     });
+    let title = $("#quick-details .title").text();
+    $(".pdf-container iframe").attr("title", title);
   }
 });
