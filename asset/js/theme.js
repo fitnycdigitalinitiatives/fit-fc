@@ -100,10 +100,10 @@ $(document).ready(function () {
       event.preventDefault();
       saveAs($(this).attr("href"), $(this).data("id") + ".txt");
     });
-    $("#pdf-download").on("click.fashionCalendar", function (event) {
-      event.preventDefault();
-      $("iframe.pdfobject").contents().find("#download").click();
-    });
+    // $("#pdf-download").on("click.fashionCalendar", function (event) {
+    //   event.preventDefault();
+    //   $("iframe.pdfobject").contents().find("#download").click();
+    // });
     let title = $("#quick-details .title").text();
     $(".pdf-container iframe").attr("title", title);
   }
