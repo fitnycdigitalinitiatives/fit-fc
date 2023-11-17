@@ -113,8 +113,7 @@ $lang = $this->lang();
                 </span>
               </button>
               <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" id="pdf-download"
-                    href="<?php echo 'https://archive.org/download/' . $iaCode . '/' . $refCode . '.pdf'; ?>">PDF</a>
+                <li><button class="dropdown-item" id="pdf-download" data-id="<?php echo $item->id(); ?>">PDF</button>
                 </li>
                 <li><a class="dropdown-item"
                     href="<?php echo 'https://archive.org/download/' . $iaCode . '/' . $refCode . '_images.tar'; ?>">Tiff

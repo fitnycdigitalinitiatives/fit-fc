@@ -100,10 +100,18 @@ $(document).ready(function () {
       event.preventDefault();
       saveAs($(this).attr("href"), $(this).data("id") + ".txt");
     });
-    // $("#pdf-download").on("click.fashionCalendar", function (event) {
-    //   event.preventDefault();
-    //   $("iframe.pdfobject").contents().find("#download").click();
-    // });
+    $("#pdf-download").on("click.fashionCalendar", function (event) {
+      const id = $(this).data("id")
+      fetch(`/data-atlas-api/download?id=${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.url);
+          window.location.href = data.url;
+        }).catch((error) => {
+          console.log(error);
+          console.log(`Error downloading PDF`);
+        });
+    });
     let title = $("#quick-details .title").text();
     $(".pdf-container iframe").attr("title", title);
   }
