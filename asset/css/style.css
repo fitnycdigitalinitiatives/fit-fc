@@ -232,8 +232,12 @@ header .logo img {
   max-width: 100%;
 }
 
-header .nav-link {
+header .main-navbar .nav-link {
   font-weight: bold;
+}
+
+header .main-navbar .user-info .nav-link {
+  font-weight: inherit;
 }
 
 .dropdown-submenu {
