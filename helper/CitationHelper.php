@@ -1,4 +1,5 @@
 <?php
+
 namespace OmekaTheme\Helper;
 
 use Laminas\View\Helper\AbstractHelper;
@@ -11,54 +12,16 @@ class CitationHelper extends AbstractHelper
     $escape = $this->getView()->plugin('escapeHtml');
     $title = $item->displayTitle();
     $url = $escape($item->url());
-    $apa = 'Finley, R. <em>' . $title . '</em>. Fashion Calendar Research Database, ' . $url;
-    $chicago = 'Finley, Ruth. "' . $title . '". Fashion Calendar Research Database. ' . $url;
-    $mla = 'Finley, Ruth. <em>' . $title . '</em>. Fashion Calendar Research Database, ' . $url;
+    $chicago = 'Finley, Ruth. "' . $title . '". Fashion Calendar Research Database. <a href="' . $url . '">' . $url . '</a>. Courtesy of the Fashion Institute of Technology-SUNY, Gladys Marcus Library unit of Special Collections and FIT Archive under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.';
     return '
-        <ul class="nav nav-tabs mb-3" id="citationTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active text-dark" id="apa-tab" data-bs-toggle="tab" data-bs-target="#apa" type="button" role="tab" aria-controls="apa" aria-selected="true">APA</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link text-dark" id="mla-tab" data-bs-toggle="tab" data-bs-target="#mla" type="button" role="tab" aria-controls="mla" aria-selected="false">MLA</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link text-dark" id="chicago-tab" data-bs-toggle="tab" data-bs-target="#chicago" type="button" role="tab" aria-controls="chicago" aria-selected="false">Chicago/Turabian</button>
-          </li>
-        </ul>
-        <div class="tab-content" id="citationTabContent">
-          <div class="tab-pane fade show active" id="apa" role="tabpanel" aria-labelledby="apa-tab">
-            <div class="input-group mb-3">
-              <div class="form-control font-monospace text-break" id="apaCitation">
-              ' . str_replace('..', '.', $apa) . '
-              </div>
-              <button class="btn btn-dark clip-button" type="button" id="apa-button" data-clipboard-target="#apaCitation" aria-label="Copy citation to clipboard">
-                <i class="fas fa-copy" title="Copy citation to clipboard" aria-hidden="true"></i>
-              </button>
-            </div>
+        <div id="citation" class="input-group my-3">
+          <div class="form-control font-monospace text-break bg-white" id="chicagoCitation">
+          ' . str_replace('..', '.', $chicago) . '
           </div>
-          <div class="tab-pane fade" id="mla" role="tabpanel" aria-labelledby="mla-tab">
-          <div class="input-group mb-3">
-            <div class="form-control font-monospace text-break" id="mlaCitation">
-            ' . str_replace('..', '.', $mla) . '
-            </div>
-            <button class="btn btn-dark clip-button" type="button" id="mla-button" data-clipboard-target="#mlaCitation" aria-label="Copy citation to clipboard">
-              <i class="fas fa-copy" title="Copy citation to clipboard" aria-hidden="true"></i>
-            </button>
-          </div>
-          </div>
-          <div class="tab-pane fade" id="chicago" role="tabpanel" aria-labelledby="chicago-tab">
-          <div class="input-group mb-3">
-            <div class="form-control font-monospace text-break" id="chicagoCitation">
-            ' . str_replace('..', '.', $chicago) . '
-            </div>
-            <button class="btn btn-dark clip-button" type="button" id="chicago-button" data-clipboard-target="#chicagoCitation" aria-label="Copy citation to clipboard">
-              <i class="fas fa-copy" title="Copy citation to clipboard" aria-hidden="true"></i>
-            </button>
-          </div>
-          </div>
+          <button class="btn btn-dark clip-button" type="button" id="chicago-button" data-clipboard-target="#chicagoCitation" aria-label="Copy citation to clipboard">
+            <i class="fas fa-copy" title="Copy citation to clipboard" aria-hidden="true"></i>
+          </button>
         </div>
-
         ';
   }
   // Converts $title to Title Case, and returns the result.
