@@ -12,7 +12,7 @@ class CitationHelper extends AbstractHelper
     $escape = $this->getView()->plugin('escapeHtml');
     $title = $item->displayTitle();
     $url = $escape($item->url());
-    $chicago = 'Finley, Ruth. "' . $title . '". Fashion Calendar Research Database. <a href="' . $url . '">' . $url . '</a>. Courtesy of the Fashion Institute of Technology-SUNY, Gladys Marcus Library unit of Special Collections and FIT Archive under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.';
+    $chicago = 'Finley, Ruth. "' . $title . '". Fashion Calendar Research Database. <a href="' . $url . '">' . $url . '</a>. Courtesy of the Fashion Institute of Technology Library, Department of Special Collections and FIT Archive under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.';
     return '
         <div id="citation" class="input-group my-3">
           <div class="form-control font-monospace text-break bg-white" id="chicagoCitation">
